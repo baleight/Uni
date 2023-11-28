@@ -20,3 +20,12 @@ git branch -a
     git fetch origin
     git reset --hard origin/main
     git push origin main --force
+
+```git
+cd C:\Users\baleo\Pictures\GitUni
+git add .
+git commit -m 'new-release'
+git push -u origin main
+```
+
+
