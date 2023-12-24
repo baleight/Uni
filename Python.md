@@ -2,10 +2,6 @@
 
 ###### Complementi di programmazione UNIMORE
 
-
-
-
-
 ## Introduzione
 
 #### Linguaggi statici VS Linguaggi Dinamici
@@ -18,8 +14,6 @@ Ling. Statici (Java, C++, C#)
 * Forte tipizzazione: i cast devono essere espliciti
 - Gli errori sono rilevati prima che il programma viene eseguito
 * Linguaggi compilati
-  
-  
 
 Linguaggi Dinamici (Python, JavaScript e Ruby)-> si sa analizzare e modificare durante run-time
 
@@ -38,8 +32,6 @@ Linguaggi Dinamici (Python, JavaScript e Ruby)-> si sa analizzare e modificare d
 * più flessibile ma prestazioni più lente a causa della allocazione di memoria, difficoltà a mantenere il codice
 
 * il debug più facile e la sintassi anche
-  
-  
 
 #### Linguaggi Compilati VS Interpretati
 
@@ -88,8 +80,6 @@ Basso(Assembly e linguaggio macchina):
 - Non sono portabili, dipendenti dall'architettura hardware specifica
 
 - Molto complessi e suscettibili ad errore
-  
-  
 
 ### Tipizzazione
 
@@ -169,7 +159,6 @@ valore_verità = True
    lista.sort(): ordina gli oggetti contenuti - modifica lista in-place!
    sorted(lista) non modifica la lista originale
    len(lista): ritorna il numero di elementi contenuti in una lista
-   
    ```
 
 6. **Tuple:** Le tuple sono simili alle liste ma sono immutabili, definite con parentesi tonde `()`. Ad esempio:
@@ -192,7 +181,6 @@ valore_verità = True
    .items(): restituisce una lista di tuple (chiave, valore) della[chiave] : elimina la chiave e il valore dal dizionario
    .pop(chiave): elimina e restituisce il valore operatore in: ‘uno’ in a -> True se la chiave ‘uno’ è presente in a
    .has_key(chiave): True se la chiave è presente nel dizionario
-   
    ```
 
 8. **Insiemi (Sets):** Gli insiemi sono collezioni non ordinate di elementi unici. Si definiscono con parentesi graffe `{}`. Ad esempio:
@@ -210,7 +198,6 @@ Esempi:
 - Unione: S1.union(S2) (simbolo “|”)
 - Intersezione: S1.intersection(S2) (simbolo “&”)
 - Differenza: S1.difference(S2) (simbolo “-”)
-
 ```
 
 9. **None:** Il tipo di dato `None` è utilizzato per rappresentare l'assenza di un valore e spesso è restituito da funzioni senza un valore di ritorno esplicito.
@@ -240,8 +227,6 @@ a = ‘abc’         ->    for i in enumerate(a) -> (0,’a’) (1,’b’) (2,
 Per essere utilizzato come elenco deve avere un metodo _iter_() , _next_()
 Esempio per a = [1,2]
     i = a._iter() POI i._next_() -> 1 POI i._next_() -> 2 POI i._next_() -> Eccez. Stop
-
-
 ```
 
 ###### Condizionale
@@ -253,7 +238,6 @@ If condizione
         codice
     else:
         codice
-
 ```
 
 ###### Operazioni
@@ -326,12 +310,9 @@ i = i + 1
 for y in range(10) print(ciao) #scorre la funzione range(stop) e quando arriva a yield si interrompe l’esecuzione del while e si ritorna a y il suo contenuto ovvero i, poi esegue quello che c'è dentro al for e si riprende da dove si era interrotta nel while -> i=i+1
 
 a = [x**2 for x in range(10)] -> a conterrà una lista dei quadrati da 0 a 9
-
 ```
 
 ### SCOPE
-
-
 
 ![](https://lh7-us.googleusercontent.com/W0z7RJsq-ZshOwocji2DgYFP0LiB_zhIlsWj3zKKetMZrk0xCFqfsZu9xF3TcEGlDeY6ZlnhG8PrNq6Wl7z2Wd5UzMHuQJDfOQETZ97koWJGcR8Oj7S1gtEU05Wq7B4cLE8ahbk69rbWtaSzykgLLhI)
 
@@ -445,7 +426,6 @@ def mia_funzione(parametro):
 
 valore = 5
 risultato = mia_funzione(valore)
-
 ```
 
 ### CLASSI E OGGETTI
@@ -465,7 +445,281 @@ Qual e' la differenza tra questi due?
 class NomeClasse:
     i = 0 #attributo della classe, per utilizzarlo da un altra classe NomeClasse.i
     def metodo1(self,arg1,arg2)
-
 ```
 
 # 
+
+Se io faccio un progetto e lo voglio distrubuire, senza creare un ambiente virtuale, lui va acercare build nel path di sistema, 
+
+se installo il build attraveso build dentro il venv lo vedo solo li, ma se lo faccio globalmente lo vedono tutti
+
+## Gestione della memoria
+
+Cosa succede sotto, se faccio  A =1?
+Viene salvato in memoria, ma come e' organizzato.
+
+A seconda del punto del prgramma essi vengono salvati in aree  differenti,
+
+Cosa ritorna il malloc: un puntatore.
+
+int a = 0
+
+due zone di memoria:
+
+- Heap: non so dove e' puntato
+
+- Stack: uno sopra l'altro, memoria del programma inizia dal basso e sale verso l'alto, per recupare devo salire di un tot di righe.
+
+La variabile viene salvata nello stack.
+
+La gestione della memoria prima in C era manuale, si fanno sia le malloc che le free
+
+Gestione automatica: la memoria aumenta in python? viene gestito tutto dal Garbage collector
+
+che viene usato da Java,
+
+Python usa sia il Referenc Counting che Garbage collector.
+
+In python cosa succede?
+
+a = 1
+
+Viene creato un oggetto 1 poi viene puntato ad A
+
+a = 2  #viene creato un oggetto 2 e poi SOSTITUISCE (ELIMANDO 1) il puntatotre di A
+
+Si basa sulla irrangiugibilita sintattica.
+
+Reference Counting: un approccio semplice
+
+ viene allocato l'oggetto e il contatore(che segna il numero delle reference), se il puntatore ha referenza 0 libera la memoria.
+
+Tiene traccia dei numeri dei referenti
+
+memory leak
+
+a = {'k',1}
+
+b = {'k',a}
+
+d = {'k',b}
+
+a=1 b=1
+
+Garbage collector,cose?
+
+e' un entita che sta ferma e ogni tot viene chiamato per analizzare la memoria e decide cosa cancellare.
+
+Si attiva ogni tot tempo o quando la memoria occupata raggiunge un limite (Python)
+
+- Tracing: vedono qualsiasi oggetto e capiscono quali sono referenziati o meno, cancella quelli non raggiungibili
+  Gli oggetti radici(dove parte), variabili globali, locali, o argomenti di funzioni.
+  Parte il garbage collector e cerca ogni riferimento collegato.
+  Non fa una scansione,  e' reattivo, ogni cosa che vede si attiva
+  Markand Sweep
+
+- Ogni oggetto raggiungibile viene targato con valore di raggiungibilita, flag =1 raggiungibile flag = 0, no.
+
+- Si riscansiona tutto per ogni albero e si marchiano i flag, poi si fa un secondo ciclo lineare per cancellare i flag con 0
+  
+  
+
+Tri-color Marking:algoritmo organizzato insiemi: 
+
+white: canditatto alla rimozione, posso diventare pero raggiungibile , grey: raggiungibili, black:
+
+Esempio
+
+Fase 1 , tutti gli oggetti radici, venongo aggiunti nel Grey-Set.
+
+Tutti gli oggetti radici vanno nel grey set gli altri nel white, il black alliniizio e' vuoto
+
+Fase 2:
+
+Prendo ogni oggetto dal grey set e li scannerizzo , cerco solo nei bianchi.
+
+Quando ho vinito tutti i suoi discendenti il precedente nodo lo porto al Black.
+
+Arrivo alla fine che tutti i grey sara vuoto, e ci saranno alcuni nodo nel white che sono possibili cancellarli
+
+Rilascio memorio
+
+
+
+- Garbage collector
+  
+  - Generational
+    Gli oggetti piu vecchi e' piu probabili che rimangono vivi.
+    Questi dividono gli oggetti per anzianita, ogni volta che is attivano controllano gli oggetti e vedono se si possono cancellare in base,
+    Le genrazione piu giovani le controllero molto piu volte, invece quelli piu vecchi esempio la radice non cambiera mai e viene controllato infatti meno volte.
+    Approccio molto veloce, perche analizzo solo il sotto insieme, il contro e' se un oggetto vecchio non e' piu raggiungibile lo controllo solamente molto dopo.
+    Come si classifica:
+    
+    - Eden: appena creati
+    
+    - Survivor 2: sopravvissuto ad un certo numero di cicli
+    
+    - Suvivor 1: sopravive a molto piu ciclo
+    
+    - Old: oggetti piu vecchi
+    
+    Analizzo gli Eden, se hanno un oggetto referenziato sono sopravvisuti ad un ciclo, etc.. 
+  
+  - f
+    
+    
+
+- Generali
+  
+  
+  
+  
+
+Python approccio ibridi
+
+Reference counting non attivo,
+
+Generational garbage in cui la generazione Eden analizzo con piu frequenza, older meno frequenza
+
+Si puo disabilitare il garbage collector e avere solo reference counting
+
+Posso lanciare su una generazione specificia
+
+
+
+Il sistema operativo mette a disposizione diversi strumenti ma non sono granulari: 
+
+Libreria tracemalloc .
+
+
+
+Come gestisce la memoria l' interprete di  Python?
+
+a = 1, 
+
+creo l'oggetto 1 in memoria, l'interprete se fa tanti a=1, dovrei fare tanti malloc quanti le a allocate.
+
+Molto dispendioso, ecco perche si usano delle tecniche per minimizzare le malloc e le free.
+
+l'interprete e' processo che  valuta il nostro programma, e concede un spazio virtuale (stack e heap) di memoria.  L'oggetto lo mettiamo dentro heap privato del python e poi l'Allocattore gestira poi la riduzione.
+
+Un ciclo, ogni volta che incremento sto creando un nuovo intero, un nuovo free.
+Troppa allocazione, ecc
+
+Se mi serve di piu di heap python chiamo il so per fare la malloc.
+
+Se l'oggetto e' troppo grande chiamo direttaente la malloc ma se l'oggetto ha un allocatore specifico ...
+
+Heap privato come viene gestito, 
+Arena : spazio privato contenente degli oggetti, quando creo un nuovo oggetto la inserisco nel arena piu piena, sia perche faccio piu facilemnte la free, non posso liberare la memoria.
+Io ho bisogno di liberare un arena piu velocemente, in piu se ho tutti gli oggetti vicini, io ho probabilita che le posso portare in cache piu facilmente.
+
+divisa in Pool: Ogni pool ha una dimensione contigua e la dimensione e' un file del sistema operativo, ogni pool e' diviso in piu blocchi, un blocco e' un oggetto,
+
+ogni oggetto e' un blocco, di cui dimensioni fissa per ogni blocco.
+
+se io ho un blocco da 4, nello stesso pool avro allinterno dei blocchi con stessa dimensione. quindi 4, se io ho un oggetto stringa di dimensione 10, il blocco 10 andra nel pool di blocco pool.
+
+Se satura l'arena, io creo un altra arena.
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Debug
+
+Esiste un modulo per dubuggare, faccio debuggher per il codice sorgente.
+
+Modulo pdb > runnato con argomento una stringa di codice:
+
+python3 -m pdb <program>, legge e apre un interprete mostranod i vari comandi:
+
+h significa help
+
+comandi che possiamo dare al debugger
+
+w(here) ->stampa la traccia dello stacke,flusso delle funzioni/comandi effettuate
+
+u(p) -> alzo lo scope, vedo di piu 
+
+b (reak) nome file) -> posso mettere un break point ad una certa riga, si puo usare anche con la condizione,quando e' vero mi fermo.
+
+cl(ear) 
+
+
+
+
+
+09/01 Scritto Protoclli
+12/01 Orale Protocolli
+22/01 Fisica
+23/01 Statistica
+15/02 Architettura
+20/02 Python Scritto
+27/02 Python Orale
+
+
+
+### File I/O
+
+Cose un file? Astrazione della memoria qualsiasi tipo di memoria o dispotivi esempre una webcam viene vista come un file dal so.
+
+Identifichiamo il file da path e nome. Come si apre un file in pyhthon?
+
+Bisogna per forza chiudere il file, perche non scrive diretamenre nel file prima viene salvato in un buffer e poi dopo salva su hard disk
+
+Leggo l'intero documento:
+
+fd = open("miofile", "r" ) ci ritorna un descrittore, un riferimento che ci riferisce a quel file
+
+fd = open("miofile", "r" )  scrivo nel file.fd.close. a -> append
+
+L'istruzione with crea un contesto, uno scope con caraterisiche aggiugnitva
+
+with fa delle istruzioni preliminari e 
+
+with --- as v:  post operazioni e poi chiude il file automaticamente.
+
+
+
+Scrivere dei byte nel file "miofile", "w"
+
+Pickle, 
+
+Salvare qualcosa di piu complesso si usa questo modulo, che serializza un oggetto
+
+
+
+Compare le performance del C e del Python
+
+cProfile modulo che serve per profilare parti di codice del esecuzione.
+
+# Parsing argomenti
+
+passare edgli argomenti in input ad un programma
+
+./.a.out primo_arg secondo_arg
+
+sys.argv abbiamo una lista importata in ingresso input
+
+Primo argomento il nome del programma.
+
+il modulo argparse che gestice molti aspetti.
+
+arguments = parser.pares_args()
+
+
+
+
+
+Prova Pratica
+
+

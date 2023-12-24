@@ -173,3 +173,15 @@ public:
 };
 
 #endif // ! DRIVER_HH
+
+//VarBindingAST
+VarBindingAST: public RootAST{
+  private:
+    std::string Name:
+    ExprAST* Val;
+public: //simboltable ci sono le istruzioni per loc, pescare nei registi il valore di alloca
+  VarBindingAST(std:: string Name, ExprAST* Val);
+  AllocaInst *codegen(driven& drv) override;
+  std::string& getName();
+
+}

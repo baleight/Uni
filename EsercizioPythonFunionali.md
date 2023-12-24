@@ -7,7 +7,8 @@ a = """ afwefgewgewgwegwfewf
 fqwfqewfqfgqwefqfg
 qfgqg
 qefqfgqg """
-s = list(map(lambda x: x.upper(), filter(lambda x: x not in['a','e','i','o','',''])
+s = list(map(lambda x: x.upper(), filter(lambda x: x not in['a','e','i','o','u','A','E','I','O','U'], a)))
+print(s)
 ```
 
 
@@ -46,3 +47,5 @@ a = input('inserire calcolo')
 b = eval(a)
 print(b)
 ```
+
+

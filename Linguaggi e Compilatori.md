@@ -44,3 +44,25 @@ cp -r set()
 ```
 
 
+
+
+
+Come fare una funzione nel parser:
+
+
+
+```bash
+  def fibonacci(n)
+      n<2 ? 1 :
+      { 
+      var a = fibonacci(n-2);
+      var b = fibonacci(n-2)
+      a+b;
+      }
+  //dalla frase all'assioma
+  ... vardefs ... => ... vardefs; binding .. => ... binding ; binding ...
+```
+
+
+
+

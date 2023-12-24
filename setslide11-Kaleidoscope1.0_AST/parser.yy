@@ -56,11 +56,16 @@
 %type <std::vector<ExprAST*>> optexp
 %type <std::vector<ExprAST*>> explist
 %type <RootAST*> program
+%type <ExprAST> exprif //aggiunto
+%type <ExprAST> condexpr //aggiunto
 %type <RootAST*> top
 %type <FunctionAST*> definition
 %type <PrototypeAST*> external
 %type <PrototypeAST*> proto
 %type <std::vector<std::string>> idseq
+%type <BlockExprAst*> blockexp
+%type <std::vector<VarBindingsAST*>> vardefs
+%type <VarBindingsAST*> binding 
 
 %%
 %start startsymb;
@@ -104,6 +109,37 @@ exp:
 | idexp                { $$ = $1; }
 | "(" exp ")"          { $$ = $2; }
 | "number"             { $$ = new NumberExprAST($1); };
+| exprif               { $$ = $1;}
+blockexp               { $$ = $1;}
+
+blockexp:
+"{" vardefs ";" exp "}" { $$ = new BlockExprAst($2,$4);}
+
+//binding = legame, leghiamo il nome al identificatore, 
+vardefs:
+  binding { std::vector<VarBindingsAST *> definitions:
+            definitinois.push_back($1);
+            $$ = definitinois; }
+  vardefs ";" binding  { $1.push_back($3);
+                      $$ = $1;}
+
+binding: 
+  "var" "id" "=" exp { $$ = new VarBindingsAST($2,$4);}
+
+exprif:
+
+//creaiamo una nuova classe expressione condizionale
+//costruiamo l'albero
+//come si definisce un oggetto tipo: x<1 ? 1 : 2
+condexpr "?" exp ":" exp { $$ = New IfExprAST($1,$3,$5); } 
+
+condexpr:
+  expr "<" exp { $$ = new BinaryExprAST('<',$1,$3); }
+  exp "=" exp  { $$ = new BinaryExprAST('=',$1,$3); }
+
+
+
+
 
 idexp:
   "id"                 { $$ = new VariableExprAST($1); }

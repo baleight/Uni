@@ -329,3 +329,30 @@ else
   return nullptr;
 };
 
+**************  Block expression tree***********************
+//implementazione del costruttore
+BlockExprAS::BlockExprAST(std::vector<VariableExprAST*> Def, ExprAST* Val):
+  Def(std::move(Def)), Val(Val) {};
+Value* BlockExprAST::codegen(driver& drv){
+    std::vector<AllocaInst*> tmp;
+    for(int i=0,e=Def.size();  i < e; i++)// var a=
+    {
+      AllocaInst *boundVal = Def[i]-> codegen(drv);
+      if (!boundVal) return nullptr;
+      tmp.push_back(NamedValue[Def[i]->getName()])
+      drv.NamedValue[Def[i]->getName()] = boundVal;
+    };
+    Value *blockvalue = Val->codegen(drv);  //chiamata ricorsiva che si riferisce al body
+    for(int i=0,e=Def.size();  i < e; i++)// 
+    {
+      drv.NamedValue[Def[i]->getName()] = tmp[i];
+    };
+    
+    
+    return blockvalue; 
+}
+VarBindingAST::VarBindingAST(std::string Name, ExprAST* Val):
+Name(Name), Bal(Val) {};
+std::string& VarBindingAST::getName(){return Name; };
+AllocaInst *bound
+
