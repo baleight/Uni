@@ -8,6 +8,13 @@ Ecco un riassunto dei comandi base in Python:
 
 - `int`, `float`, `str`, `list`, `tuple`, `dict`, `set`: Rappresentano i diversi tipi di dati supportati in Python.
 
+```python
+var=10  
+str_dinamica = f’la variabile ha valore: {var}’
+#Input
+res = input(‘inserisci qualcosa’)
+```
+
 ## **2. Operazioni Matematiche:**
 
 - `+`, `-`, `*`, `/`: Eseguono operazioni matematiche di addizione, sottrazione, moltiplicazione e divisione.
@@ -33,7 +40,8 @@ else:
 
 - `for elemento in sequenza:`: Itera attraverso gli elementi di una sequenza.
 
-Lo statement for parte chiamando una funzione '_iter_() '
+Lo statement  for chiama __iter__() e poi __next__() sull'oggetto
+ritornato
 
 ```python
 for i in range(10): 
@@ -49,7 +57,7 @@ for i in a: print(i) -> a\n b\n
 a = {'key1': 1, 'key2': 2}    #Dizionari
 for i in a: print(i) -> key1\n key2\n 
 a = 'abc'    #Enumara la sequenza su cui si itera
-for i,o in enumerate(a): print(i)#stampa (a,'a')(1,'b')(2,'c')
+for i,o in enumerate(a): print(i)#stampa (0,'a')(1,'b')(2,'c')
 -> 0\n 1\n 2\n 
 ```
 
@@ -70,6 +78,22 @@ continue -> salta all'iterazione for/while successiva`
 ## **5. Funzioni:**
 
 - `def nome_funzione(parametri):`: Definisce una funzione con i relativi parametri.
+
+E’ possibile anche specificare a quale parametro ci si riferisce (keyword
+arguments)
+
+![](C:\Users\Bale\Downloads\ImgMd\2023-12-24-15-07-32-image.png)
+
+```python
+def funzione(*args, **kwargs):
+#args sono tutti i parametri posizionali
+#kwargs sono tutti gli argomenti dei keyword condenzati in un dizionario
+a = [1,2,3,4,5]
+funzione(*a) # equivale a funzione(1,2,3,4,5)
+a = {a:1, b:2, c:3}#Vale anche per i Dizionario
+funzione(**a) equivale a funzione(a=1,b=2,c=3)
+```
+
 - `return valore`: Restituisce un valore dalla funzione.
 - `args`, `kwargs`: Parametri arbitrari in una funzione (argomenti posizionali, argomenti keyword).
 
